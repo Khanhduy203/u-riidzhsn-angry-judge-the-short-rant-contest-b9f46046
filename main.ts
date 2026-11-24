@@ -13,6 +13,12 @@ if (RANT.length > 400) {
 if (RANT.trim().length === 0) {
   throw new Error("Rant must not be empty or only whitespace.");
 }
+if (/[\r\n]/.test(RANT)) {
+  throw new Error("Rant must be exactly one line (no embedded newlines).");
+}
+if (RANT !== RANT.trim()) {
+  throw new Error("Rant must not have leading or trailing whitespace.");
+}
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR;
 if (!outDir) {
